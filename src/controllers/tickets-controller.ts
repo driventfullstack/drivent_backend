@@ -2,12 +2,28 @@ import { NextFunction, Response } from 'express';
 import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
 import ticketService from '@/services/tickets-service';
-import { InputTicketBody } from '@/protocols';
+import { InputTicketBody, InputTypeTicketBody } from '@/protocols';
 
 export async function getTicketTypes(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<Response> {
   try {
     const ticketTypes = await ticketService.getTicketType();
     return res.status(httpStatus.OK).send(ticketTypes);
+  } catch (e) {
+    next(e);
+  }
+}
+
+export async function createTicketType(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<Response> {
+  const { userId } = req;
+  const { ticketType } = req.body as InputTypeTicketBody;
+
+  try {
+    const ticketTypeCreated = await ticketService.createTicketType(userId, ticketType);
+    return res.status(httpStatus.CREATED).send(ticketTypeCreated);
   } catch (e) {
     next(e);
   }
