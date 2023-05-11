@@ -58,9 +58,9 @@ async function ticketProcessPayment(ticketId: number) {
   });
 }
 
-async function createTicketType(ticketType: TicketTypeParams) {
+async function createTicketType(ticketTypeData: TicketTypeParams) {
   return prisma.ticketType.create({
-    data: ticketType,
+    data: ticketTypeData,
   });
 }
 

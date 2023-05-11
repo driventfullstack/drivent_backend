@@ -42,30 +42,33 @@ async function createTicketType(userId: number, ticketType: string): Promise<Tic
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
   if (!enrollment) throw notFoundError();
 
-  if (ticketType === 'Online') {
-    const ticketTypeData: TicketTypeParams = {
-      name: 'Online',
-      price: 0,
-      isRemote: true,
-      includesHotel: false,
-    };
+  try {
+    if (ticketType === 'online') {
+      const ticketTypeData: TicketTypeParams = {
+        name: 'online',
+        price: 100,
+        isRemote: true,
+        includesHotel: false,
+      };
 
-    const ticketType = await ticketsRepository.createTicketType(ticketTypeData);
+      const ticketTypeCreated = await ticketsRepository.createTicketType(ticketTypeData);
+      return ticketTypeCreated;
+    }
 
-    return ticketType;
-  }
+    if (ticketType === 'presencial') {
+      const ticketTypeData: TicketTypeParams = {
+        name: 'presencial',
+        price: 250,
+        isRemote: false,
+        includesHotel: false,
+      };
 
-  if (ticketType === 'Presencial') {
-    const ticketTypeData: TicketTypeParams = {
-      name: 'Presencial',
-      price: 0,
-      isRemote: false,
-      includesHotel: false,
-    };
-
-    const ticketType = await ticketsRepository.createTicketType(ticketTypeData);
-
-    return ticketType;
+      const ticketTypeCreated = await ticketsRepository.createTicketType(ticketTypeData);
+      return ticketTypeCreated;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
 }
 
