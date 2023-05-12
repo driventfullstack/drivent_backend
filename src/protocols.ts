@@ -48,6 +48,7 @@ export type InputTicketBody = {
 
 export type InputTypeTicketBody = {
   ticketType: string;
+  hotel: string;
 };
 
 export type TicketTypeParams = Omit<TicketType, 'id' | 'createdAt' | 'updatedAt'>;

@@ -19,10 +19,10 @@ export async function createTicketType(
   next: NextFunction,
 ): Promise<Response> {
   const { userId } = req;
-  const { ticketType } = req.body as InputTypeTicketBody;
+  const { ticketType, hotel } = req.body as InputTypeTicketBody;
 
   try {
-    const ticketTypeCreated = await ticketService.createTicketType(userId, ticketType);
+    const ticketTypeCreated = await ticketService.createTicketType(userId, ticketType, hotel);
     return res.status(httpStatus.CREATED).send(ticketTypeCreated);
   } catch (e) {
     next(e);
