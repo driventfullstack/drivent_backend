@@ -58,7 +58,7 @@ async function createTicketType(userId: number, ticketType: string, hotel: strin
     if (ticketType === 'Presencial' && hotel === 'PresencialcomHotel') {
       const ticketTypeData: TicketTypeParams = {
         name: 'presencial',
-        price: 650,
+        price: 600,
         isRemote: false,
         includesHotel: true,
       };
