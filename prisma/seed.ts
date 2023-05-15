@@ -36,6 +36,53 @@ async function main() {
     });
   }
 
+  let hotelTest = await prisma.hotel.findFirst();
+  if (!hotelTest) {
+    await prisma.hotel.createMany({
+      data: [
+        {
+          name: 'Cativeiro A',
+          image: 'https://pbs.twimg.com/media/D-ZgkyQXoAADbqZ?format=jpg&name=900x900',
+        },
+        {
+          name: 'Cativeiro B',
+          image:
+            'https://s2.glbimg.com/en14oahqtOxbLiX1ZbdZr3dYv2Q=/smart/e.glbimg.com/og/ed/f/original/2020/09/11/anuncio-apartamento-viraliza-04.jpg',
+        },
+      ],
+    });
+  }
+
+  let roomTest = await prisma.room.findFirst();
+  if (!roomTest) {
+    let hotel = await prisma.hotel.findFirst();
+    if (!hotel) return;
+    await prisma.room.createMany({
+      data: [
+        {
+          name: 'quarto 1',
+          capacity: 2,
+          hotelId: hotel.id,
+        },
+        {
+          name: 'quarto 2',
+          capacity: 1,
+          hotelId: hotel.id,
+        },
+        {
+          name: 'quarto 3',
+          capacity: 2,
+          hotelId: hotel.id,
+        },
+        {
+          name: 'quarto 4',
+          capacity: 3,
+          hotelId: hotel.id,
+        },
+      ],
+    });
+  }
+
   console.log({ event });
 }
 
