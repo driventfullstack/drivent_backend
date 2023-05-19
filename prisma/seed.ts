@@ -61,17 +61,17 @@ async function main() {
       data: [
         {
           name: 'quarto 1',
-          capacity: 2,
+          capacity: 3,
           hotelId: hotel.id,
         },
         {
           name: 'quarto 2',
-          capacity: 1,
+          capacity: 2,
           hotelId: hotel.id,
         },
         {
           name: 'quarto 3',
-          capacity: 2,
+          capacity: 3,
           hotelId: hotel.id,
         },
         {
