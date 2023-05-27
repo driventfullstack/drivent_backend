@@ -11,3 +11,14 @@ export async function getActivities(req: AuthenticatedRequest, res: Response, ne
     next(error);
   }
 }
+
+export async function getActivitiesByDate(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const { date } = req.params;
+  console.log(date);
+  try {
+    const activities = await activitiesService.getActivitiesByDate(date);
+    return res.status(httpStatus.OK).send(activities);
+  } catch (error) {
+    next(error);
+  }
+}
