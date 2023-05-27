@@ -17,6 +17,9 @@ async function findActivitiesByDate(date: string) {
         lt: new Date(new Date(date).getTime() + 86400000),
       },
     },
+    include: {
+      Auditory: true,
+    },
   });
 }
 const activitiesRepository = { findActivities, findActivitiesByDate };
