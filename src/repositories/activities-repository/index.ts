@@ -9,7 +9,6 @@ async function findActivities() {
 }
 
 async function findActivitiesByDate(date: string) {
-  console.log(date);
   return await prisma.activities.findMany({
     where: {
       startAt: {
@@ -19,6 +18,7 @@ async function findActivitiesByDate(date: string) {
     },
     include: {
       Auditory: true,
+      Inscription: true,
     },
   });
 }
