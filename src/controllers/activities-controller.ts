@@ -14,10 +14,32 @@ export async function getActivities(req: AuthenticatedRequest, res: Response, ne
 
 export async function getActivitiesByDate(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const { date } = req.params;
-  console.log(date);
   try {
     const activities = await activitiesService.getActivitiesByDate(date);
     return res.status(httpStatus.OK).send(activities);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getUserActivities(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const { userId } = req;
+
+  try {
+    const activities = await activitiesService.getUserActivities(userId);
+    return res.status(httpStatus.OK).send(activities);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function postActivities(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const { userId } = req;
+  const { activityId } = req.body;
+
+  try {
+    const activities = await activitiesService.postActivities(Number(userId), Number(activityId));
+    return res.status(httpStatus.CREATED).send(activities);
   } catch (error) {
     next(error);
   }
