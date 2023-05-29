@@ -62,6 +62,18 @@ export function handleApplicationErrors(
     });
   }
 
+  if (err.name === 'ActivityConflictingTimeError') {
+    return res.status(httpStatus.CONFLICT).send({
+      message: err.message,
+    });
+  }
+
+  if (err.name === 'CannotBookActivityError') {
+    return res.status(httpStatus.FORBIDDEN).send({
+      message: err.message,
+    });
+  }
+
   res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
     error: 'InternalServerError',
     message: 'Internal Server Error',
